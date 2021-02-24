@@ -111,7 +111,7 @@
         <br><br>
         Status : <label id="result"></label>
         <br><br>
-        <table id="TableOrder" border="1" width="90%">
+        <table id="TableOrder" border="1" width="90%" align="center">
             <tr id="header">
                 <th><label class="cafe">Time</label></th>
                 <th><label class="cafe">Order</label></th>
@@ -139,6 +139,21 @@
         }
 
         let abi = [
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			}
+		],
+		"name": "GetOrder",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
 	{
 		"anonymous": false,
 		"inputs": [
@@ -194,21 +209,6 @@
 		],
 		"name": "OrderError",
 		"type": "event"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
-			}
-		],
-		"name": "GetOrder",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
 	},
 	{
 		"constant": true,
@@ -291,7 +291,7 @@
 ];
         var contract = web3.eth.contract(abi);
         var myContract = contract.at(
-            '0x214557bD3A5988c30ecc0A3Df19158D97914e8d9');       
+            '0x036F242ea2e749024ef15d1358300Bfc50420692');       
 
         var completeEvent =             
             myContract.OrderAdded();
@@ -378,7 +378,7 @@
                 if(index > 0){
                     myContract.getTimestamp(i, (error, result) => {
                         if(!error){
-                            timestamp = Date(result).toString();
+                            timestamp = ConvertTimestamp(result);
                             myContract.getName(i, (error, result) => {
                                 if(!error){
                                     ordername = result.toString();
@@ -438,6 +438,32 @@
             while(queueOrder.rows.length > 1){
                 queueOrder.deleteRow(queueOrder.rows.length - 1);
             }
+        }
+
+        function ConvertTimestamp(timestamp){
+            var mon = ["January", 
+                       "February",
+                       "March", 
+                       "April", 
+                       "May", 
+                       "June", 
+                       "July", 
+                       "August", 
+                       "September", 
+                       "October", 
+                       "November", 
+                       "December"];
+
+            var timeconvert = new Date(timestamp * 1000)
+
+            return (timeconvert.getDate().toString() + " " +
+                mon[timeconvert.getMonth() + 1] + " " +
+                timeconvert.getFullYear().toString() + "   " +
+                (timeconvert.getHours() % 10 == timeconvert.getHours() ? "0" + 
+                timeconvert.getHours().toString() : timeconvert.getHours().toString()) + ":" +
+                (timeconvert.getMinutes() % 10 == timeconvert.getMinutes() ? "0" + 
+                timeconvert.getMinutes().toString() : timeconvert.getMinutes().toString())
+            )
         }
 
         window.onload = GetvalueOrder();
