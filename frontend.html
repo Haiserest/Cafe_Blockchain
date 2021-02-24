@@ -7,20 +7,28 @@
     </script>
 	
 	<style>
+        h3.head{
+            font-family:Brush Script MT;
+            font-size: 30px;
+        }
 		label.cafe{
 			font-family:Brush Script MT;
-			font-size: 20px;
+			font-size: 25px;
 		}
 		h1.menu{
 			font-family:Brush Script MT;
-			font-size: 40px;
+			font-size: 50px;
 		}
+        table.center{
+            margin-left: auto;
+            margin-right: 150px;
+        }
 	</style>
 </head>
 <body>
 <center>
     <div class="container">
-        <h3 style="font-family:Brush Script MT">Cafe Blockchain</h3>
+        <h3 class="head">Cafe Blockchain</h3>
 		<!<hr size="1" width="50%" color="black">
         <h1 class="menu">M e n u</h1>
 		<hr size="2" width="50%" color="black">
@@ -110,16 +118,17 @@
 		&#169;Blockchain Cafe -- B6108687 นายกรภัทร์ บริสุทธิ์โชติพงศ์ 
         <br><br>
         Status : <label id="result"></label>
-        <br><br>
-        <table id="TableOrder" border="1" width="90%" align="center">
-            <tr id="header">
-                <th><label class="cafe">Time</label></th>
-                <th><label class="cafe">Order</label></th>
-                <th><label class="cafe">Owner</label></th>
+        </center>
+    </div> 
+        <table class="center" id="TableOrder" border="0" width="65%">
+            <tr>
+                <td><label class="cafe">No</label></td>
+                <td><label class="cafe">Time</label></td>
+                <td><label class="cafe">Order</label></td>
+                <td><label class="cafe">Owner</label></td>
             </tr>
         </table>
-    </div>
-</center>
+
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js">
     </script>
@@ -427,9 +436,10 @@
             console.log(r_count);
             var row = queueOrder.insertRow(r_count);
 
-            row.insertCell(0).innerHTML = timestamp;
-            row.insertCell(1).innerHTML = ordername;
-            row.insertCell(2).innerHTML = owner;
+            row.insertCell(0).innerHTML = r_count;
+            row.insertCell(1).innerHTML = timestamp;
+            row.insertCell(2).innerHTML = ordername;
+            row.insertCell(3).innerHTML = owner;
         }
 
         function ResetTable(){
