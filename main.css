@@ -21,7 +21,7 @@ button {
     margin: 2em 0;
     padding: 1em 2em;
     display: flexbox;
-    font-size: 10px;
+    font-size: 15px;
 }
 #result {
     padding:1em;
